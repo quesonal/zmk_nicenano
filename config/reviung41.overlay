@@ -6,6 +6,17 @@
 
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/led/led.h>
+#include <physical_layouts.dtsi>
+
+/ {
+    gtips_reviung41_layout: gtips_reviung41_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Default";
+
+        kscan = <&kscan0>;
+        transform = <&matrix_transform0>;
+    };
+};
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -51,10 +62,10 @@
     chosen {
         zmk,underglow = &led_strip;
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        zmk,physical-layout = &gtips_reviung41_layout;
     };
 
-    default_transform: keymap_transform_0 {
+    matrix_transform0: matrix_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <6>;
         rows = <7>;
@@ -69,7 +80,8 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(5,0) RC(5,1) RC(5,2) RC(5,3) 
 
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
+        wakeup-source;
+
         diode-direction = "col2row";
 
         col-gpios
